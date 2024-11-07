@@ -1,0 +1,25 @@
+---
+title: "Home"
+format: html
+---
+
+Welcome!
+
+Hello! My name is Meishu Zhao, and I'm a first-year ScM student in the Biostatistics Department at Johns Hopkins University. I enjoy spending my free time baking and hanging out with my cat, Rodolfo.
+
+<!-- Main Profile Image -->
+<img src="pictures/Meishu.JPG" style="width:200px; display: block; margin-left: auto; margin-right: auto;" />
+
+## My Interests
+
+<!-- Gallery of 6 Photos in a Grid with Centered Cat Pictures -->
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="pictures/cake1.JPG" style="width:150px; height:auto; margin: 5px;" />
+  <img src="pictures/cake2.JPG" style="width:150px; height:auto; margin: 5px;" />
+  <img src="pictures/cake3.JPG" style="width:150px; height:auto; margin: 5px;" />
+</div>
+
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+  <img src="pictures/cat1.JPG" style="width:150px; height:auto; margin: 5px;" />
+  <img src="pictures/cat2.jpg" style="width:150px; height:auto; margin: 5px;" />
+</div>

@@ -1,0 +1,227 @@
+---
+title: "Diabetes Data Analysis"
+author: Meishu Zhao
+format: html
+bibliography: references.bib
+knitr: true
+---
+
+![Diabetes-related Illustration](pictures/Image_diabetes.JPG)
+*Image Credit: [@buravleva2024diabetes].*
+
+> **Callout 1: Background on Diabetes Prevalence**
+> Diabetes is a growing global health concern, impacting millions of people. Understanding the associated risk factors can help in designing preventive measures and targeted healthcare interventions.
+
+
+## 1. Introduction
+
+This report provides an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes. The goal is to uncover patterns that could offer insights into factors associated with diabetes prevalence, which may be of interest to those looking to understand how lifestyle and health metrics like BMI, blood glucose levels, and smoking history are connected to diabetes.
+
+#### Intended Audience
+
+This report is intended for the general public, including individuals interested in understanding diabetes-related data and factors associated with diabetes risk. The analysis is presented in a straightforward manner, avoiding complex statistical jargon, so that anyone with a basic understanding of health concepts can follow along and gain insights.
+
+#### Data Source
+I used Kaggle dataset by Choksi, which provides detailed health metrics for diabetes research [@choksi2024diabetes].
+The data analyzed in this report comes from the "100,000 Diabetes Clinical Dataset" on Kaggle, contributed by Priyam Choksi. This dataset includes 16 demographic and health realated variables for 100,000 individuals and is designed to support diabetes-related research and predictive modeling.
+
+## 2. Data Dictionary
+
+| Variable              | Description                                                 |
+|-----------------------|-------------------------------------------------------------|
+| `year`                | Year of data collection                                     |
+| `gender`              | Gender of the individual                                    |
+| `age`                 | Age of the individual                                       |
+| `location`            | Location or state where data was collected                  |
+| `race:AfricanAmerican`| Indicator variable for African American race                |
+| `race:Asian`          | Indicator variable for Asian race                           |
+| `race:Caucasian`      | Indicator variable for Caucasian race                       |
+| `race:Hispanic`       | Indicator variable for Hispanic race                        |
+| `race:Other`          | Indicator variable for other races                          |
+| `hypertension`        | Whether the individual has hypertension (1 = Yes, 0 = No)   |
+| `heart_disease`       | Whether the individual has heart disease (1 = Yes, 0 = No)  |
+| `smoking_history`     | Smoking history (e.g., never, former, current)              |
+| `bmi`                 | Body Mass Index of the individual                           |
+| `hbA1c_level`         | Average blood glucose level over the last 3 months          |
+| `blood_glucose_level` | Blood glucose level at the time of measurement              |
+| `diabetes`            | Whether the individual has diabetes (1 = Yes, 0 = No)       |
+
+## 3. Data Wrangling
+```{r}
+library(dplyr)
+library(tidyr)
+
+diabetes_data <- read.csv("diabetes_dataset.csv")
+
+# new race variable
+diabetes_data <- diabetes_data %>%
+  mutate(
+    race = case_when(
+      race.AfricanAmerican == 1 ~ "African American",
+      race.Asian == 1 ~ "Asian",
+      race.Caucasian == 1 ~ "Caucasian",
+      race.Hispanic == 1 ~ "Hispanic",
+      race.Other == 1 ~ "Other",
+      TRUE ~ "Unknown"
+    )
+  )
+
+# mutate a new column for BMI categories
+diabetes_data <- diabetes_data %>% 
+  mutate(bmi_category = case_when(
+    bmi < 18.5 ~ "Underweight",
+    bmi >= 18.5 & bmi < 24.9 ~ "Normal weight",
+    bmi >= 25 & bmi < 29.9 ~ "Overweight",
+    bmi >= 30 ~ "Obese"
+  ))
+
+#change character data to factor
+diabetes_data <- diabetes_data %>% 
+  mutate(smoking_history = factor(smoking_history, levels = c("never", "former", "current", "No Info")))
+diabetes_data <- diabetes_data %>% 
+  mutate(gender = factor(gender, levels = c("Female", "Male")))
+diabetes_data <- diabetes_data %>% 
+  mutate(diabetes = factor(diabetes, levels = c("0", "1")))
+
+#rename hbA1c_level
+diabetes_data <- diabetes_data %>%
+  rename(
+    three_month_avg_glucose = hbA1c_level
+  )
+glimpse(diabetes_data)
+summary(diabetes_data)
+```
+
+## 4. Visualization
+```{r}
+library(ggplot2)
+library(skimr)
+```
+
+### 1. Box Plot of BMI by Diabetes Status
+```{r}
+ggplot(diabetes_data, aes(x = diabetes, y = bmi)) +
+  geom_boxplot() +
+  labs(title = "Box Plot of BMI by Diabetes Status",
+  subtitle =""
+       x = "Diabetes (1 = Yes, 0 = No)",
+       y = "BMI") +
+       theme_minimal()
+```
+
+### 2. Bar Plot of Diabetes by Smoking History
+```{r}
+ggplot(diabetes_data, aes(x = smoking_history, fill = factor(diabetes))) +
+  geom_bar(position = "dodge") +
+  labs(title = "Diabetes by Smoking History",
+       x = "Smoking History",
+       y = "Count",
+       fill = "Diabetes")
+```
+
+# 3. Scatter Plot of HbA1c Level vs. Blood Glucose Level, colored by Diabetes Status
+```{r}
+ggplot(diabetes_data, aes(x = hbA1c_level, y = blood_glucose_level, color = factor(diabetes))) +
+  geom_point(alpha = 0.7) +
+  labs(title = "Scatter Plot of HbA1c Level vs. Blood Glucose Level",
+       x = "HbA1c Level",
+       y = "Blood Glucose Level",
+       color = "Diabetes")
+```
+
+```{r}
+library(ggplot2)
+
+# Bar plot for diabetes prevalence by race
+ggplot(diabetes_data, aes(x = race, fill = factor(diabetes))) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Proportion of Diabetes Status by Race",
+    x = "Race",
+    y = "Proportion",
+    fill = "Diabetes Status"
+  ) +
+  theme_minimal()
+
+# Bar plot for diabetes prevalence by gender
+ggplot(diabetes_data, aes(x = gender, fill = factor(diabetes))) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Proportion of Diabetes Status by Gender",
+    x = "Gender",
+    y = "Proportion",
+    fill = "Diabetes Status"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+# Bar plot for diabetes prevalence by race
+ggplot(diabetes_data, aes(x = race, fill = factor(diabetes))) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Proportion of Diabetes Status by Race",
+    x = "Race",
+    y = "Proportion",
+    fill = "Diabetes Status"
+  ) +
+  theme_minimal()
+
+```
+## 5. Model
+
+```{r}
+# Remove rows with missing values in the relevant columns for modeling
+diabetes_data_clean <- diabetes_data %>%
+  filter(!is.na(age), !is.na(gender), !is.na(race), !is.na(bmi), 
+         !is.na(hypertension), !is.na(heart_disease), 
+         !is.na(hbA1c_level), !is.na(smoking_history))
+# Fit a logistic regression model to predict diabetes status
+model <- glm(diabetes ~ age + gender + race + bmi + hypertension + heart_disease + hbA1c_level + smoking_history, 
+             data = diabetes_data, family = "binomial")
+
+# Display model summary
+summary(model)
+
+library(ggplot2)
+
+# Add predicted probabilities to the data
+diabetes_data$predicted_prob <- predict(model, type = "response")
+
+# Plot predicted probabilities by race
+ggplot(diabetes_data, aes(x = race, y = predicted_prob)) +
+  geom_boxplot() +
+  labs(
+    title = "Predicted Probability of Diabetes by Race",
+    x = "Race",
+    y = "Predicted Probability of Diabetes"
+  ) +
+  theme_minimal()
+
+```
+
+
+```{r}
+library(broom)
+library(dplyr)
+
+# Extract coefficients, calculate odds ratios, and plot
+odds_ratios <- tidy(model) %>%
+  mutate(odds_ratio = exp(estimate)) %>%
+  filter(term != "(Intercept)")
+
+ggplot(odds_ratios, aes(x = reorder(term, odds_ratio), y = odds_ratio)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = exp(estimate - 1.96 * std.error), ymax = exp(estimate + 1.96 * std.error))) +
+  coord_flip() +
+  labs(
+    title = "Odds Ratios for Predictors of Diabetes",
+    x = "Predictors",
+    y = "Odds Ratio"
+  ) +
+  theme_minimal()
+
+```
+## 6. Conclusion
+## 7. Function Summary

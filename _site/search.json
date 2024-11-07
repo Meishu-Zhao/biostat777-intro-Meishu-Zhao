@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "Welcome!\nHello! My name is Meishu Zhao, and I’m a first-year ScM student in the Biostatistics Department at Johns Hopkins University. I enjoy spending my free time baking and hanging out with my cat, Rodolfo."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Education\nJohns Hopkins University | Baltimore, MD\nScM in Biostatistics | Aug 2024 - May 2026\nUniversity of Wisconsin-Madison | Madison, WI\nB.S. in Statistics, Economics | September 2020 - May 2024\n\n\nResearch Experiences\nNeurology Department, UW Health University Hospital Madison, WI\nStudent Researcher - Aaron Struck’s Lab\nAgriculture & Applied Economics Department, UW-Madison Madison, WI\nResearch Assistant - Sarah Johnston’s Lab\n\n\nProfessional Experiences\nChina Citic Bank Guangzhou Branch Guangzhou, China\nBanking Department Intern\nUniversity of Wisconsin Madison Madison, WI\nSOAR Academic Peer Advisor\nBank of China Guangzhou, China\nHuman Resources Government Affairs Intern\n\n\nAwards & Activities\n• Grainger Academic Excellence Scholarship Oct 2023\n• Nolan Berry Memorial Epilepsy Research Award Sept 2023\n• 2023 Mock BPA Business Competition Awards: Best Design Team and Best Collaborative Team"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "",
+    "text": "Johns Hopkins University | Baltimore, MD\nScM in Biostatistics | Aug 2024 - May 2026\nUniversity of Wisconsin-Madison | Madison, WI\nB.S. in Statistics, Economics | September 2020 - May 2024"
+  },
+  {
+    "objectID": "Example_analysis.html",
+    "href": "Example_analysis.html",
+    "title": "Data Analysis",
+    "section": "",
+    "text": "This report provides an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes. The goal is to uncover patterns that could offer insights into factors associated with diabetes prevalence, which may be of interest to those looking to understand how lifestyle and health metrics like BMI, blood glucose levels, and smoking history are connected to diabetes.\n\n\nThis report is intended for the general public, including individuals interested in understanding diabetes-related data and factors associated with diabetes risk. The analysis is presented in a straightforward manner, avoiding complex statistical jargon, so that anyone with a basic understanding of health concepts can follow along and gain insights.\n\n\n\nThis analysis uses the Kaggle dataset by Choksi, which provides detailed health metrics for diabetes research (Choksi 2024). The data analyzed in this report comes from the “100,000 Diabetes Clinical Dataset” on Kaggle, contributed by Priyam Choksi. This dataset includes demographic and health information for 100,000 individuals and is designed to support diabetes-related research and predictive modeling. It provides information on gender, age, race, hypertension, heart disease, smoking history, BMI, HbA1c levels, blood glucose levels, and diabetes status."
+  },
+  {
+    "objectID": "Example_analysis.html#data-dictionary",
+    "href": "Example_analysis.html#data-dictionary",
+    "title": "Data Analysis",
+    "section": "2. Data Dictionary",
+    "text": "2. Data Dictionary\nHere’s a brief overview of the key variables used in this analysis:\n\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nyear\nYear of data collection\n\n\ngender\nGender of the individual\n\n\nage\nAge of the individual\n\n\nlocation\nLocation or state where data was collected\n\n\nrace:AfricanAmerican\nIndicator variable for African American race\n\n\nrace:Asian\nIndicator variable for Asian race\n\n\nrace:Caucasian\nIndicator variable for Caucasian race\n\n\nrace:Hispanic\nIndicator variable for Hispanic race\n\n\nrace:Other\nIndicator variable for other races\n\n\nhypertension\nWhether the individual has hypertension (1 = Yes, 0 = No)\n\n\nheart_disease\nWhether the individual has heart disease (1 = Yes, 0 = No)\n\n\nsmoking_history\nSmoking history (e.g., never, former, current)\n\n\nbmi\nBody Mass Index of the individual\n\n\nhbA1c_level\nAverage blood glucose level over the last 3 months\n\n\nblood_glucose_level\nBlood glucose level at the time of measurement\n\n\ndiabetes\nWhether the individual has diabetes (1 = Yes, 0 = No)"
+  },
+  {
+    "objectID": "Example_analysis.html#data-wrangling",
+    "href": "Example_analysis.html#data-wrangling",
+    "title": "Data Analysis",
+    "section": "3. Data Wrangling",
+    "text": "3. Data Wrangling"
+  },
+  {
+    "objectID": "Example_analysis.html#visualization",
+    "href": "Example_analysis.html#visualization",
+    "title": "Data Analysis",
+    "section": "4. Visualization",
+    "text": "4. Visualization\n\nlibrary(ggplot2)\nlibrary(skimr)\n\n\n1. Box Plot of BMI by Diabetes Status\n\ndiabetes_data &lt;- read.csv(\"diabetes_dataset.csv\")\nggplot(diabetes_data, aes(x = factor(diabetes), y = bmi)) +\n  geom_boxplot() +\n  labs(title = \"Box Plot of BMI by Diabetes Status\",\n       x = \"Diabetes (1 = Yes, 0 = No)\",\n       y = \"BMI\")\n\n\n\n\n\n\n\n\n\n\n2. Bar Plot of Diabetes by Smoking History\n\nggplot(diabetes_data, aes(x = smoking_history, fill = factor(diabetes))) +\n  geom_bar(position = \"dodge\") +\n  labs(title = \"Diabetes by Smoking History\",\n       x = \"Smoking History\",\n       y = \"Count\",\n       fill = \"Diabetes\")"
+  },
+  {
+    "objectID": "Example_analysis.html#model",
+    "href": "Example_analysis.html#model",
+    "title": "Data Analysis",
+    "section": "5. Model",
+    "text": "5. Model"
+  },
+  {
+    "objectID": "Example_analysis.html#conclusion",
+    "href": "Example_analysis.html#conclusion",
+    "title": "Data Analysis",
+    "section": "6. Conclusion",
+    "text": "6. Conclusion"
+  },
+  {
+    "objectID": "Example_analysis.html#function-summary",
+    "href": "Example_analysis.html#function-summary",
+    "title": "Data Analysis",
+    "section": "7. Function Summary",
+    "text": "7. Function Summary"
+  },
+  {
+    "objectID": "index.html#my-interests",
+    "href": "index.html#my-interests",
+    "title": "Home",
+    "section": "My Interests",
+    "text": "My Interests"
+  },
+  {
+    "objectID": "Example_analysis.html#introduction",
+    "href": "Example_analysis.html#introduction",
+    "title": "Data Analysis",
+    "section": "",
+    "text": "This report provides an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes. The goal is to uncover patterns that could offer insights into factors associated with diabetes prevalence, which may be of interest to those looking to understand how lifestyle and health metrics like BMI, blood glucose levels, and smoking history are connected to diabetes.\n\n\nThis report is intended for the general public, including individuals interested in understanding diabetes-related data and factors associated with diabetes risk. The analysis is presented in a straightforward manner, avoiding complex statistical jargon, so that anyone with a basic understanding of health concepts can follow along and gain insights.\n\n\n\nThis analysis uses the Kaggle dataset by Choksi, which provides detailed health metrics for diabetes research (Choksi 2024). The data analyzed in this report comes from the “100,000 Diabetes Clinical Dataset” on Kaggle, contributed by Priyam Choksi. This dataset includes demographic and health information for 100,000 individuals and is designed to support diabetes-related research and predictive modeling. It provides information on gender, age, race, hypertension, heart disease, smoking history, BMI, HbA1c levels, blood glucose levels, and diabetes status."
+  }
+]
