@@ -9,17 +9,16 @@ knitr: true
 ![Diabetes-related Illustration](pictures/Image_diabetes.JPG)
 *Image Credit: [@buravleva2024diabetes].*
 
-> **Callout 1: Background on Diabetes Prevalence**
-> Diabetes is a growing global health concern, impacting millions of people. Understanding the associated risk factors can help in designing preventive measures and targeted healthcare interventions.
-
+::: {.callout-note}
+## Background on Diabetes Prevalence
+Diabetes is a chronic disease that affects how your body turns food into energy. Over **38.4 million Americans** are living with diabetes or prediabetes [@cdc2023diabetes]. Understanding the associated risk factors can help in finding patients with diabetes in the early stage and starting treatments earlier for better outcomes.
+:::
 
 ## 1. Introduction
-
-This report provides an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes. The goal is to uncover patterns that could offer insights into factors associated with diabetes prevalence, which may be of interest to those looking to understand how lifestyle and health metrics like BMI, blood glucose levels, and smoking history are connected to diabetes.
+This is an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes. 
 
 #### Intended Audience
-
-This report is intended for the general public, including individuals interested in understanding diabetes-related data and factors associated with diabetes risk. The analysis is presented in a straightforward manner, avoiding complex statistical jargon, so that anyone with a basic understanding of health concepts can follow along and gain insights.
+This report is for anyone interested in diabetes, including the general public and those with a basic understanding of health. 
 
 #### Data Source
 I used Kaggle dataset by Choksi, which provides detailed health metrics for diabetes research [@choksi2024diabetes].
@@ -50,10 +49,13 @@ The data analyzed in this report comes from the "100,000 Diabetes Clinical Datas
 ```{r}
 library(dplyr)
 library(tidyr)
+library(ggplot2)
+```
 
+
+```{r}
 diabetes_data <- read.csv("diabetes_dataset.csv")
 
-# new race variable
 diabetes_data <- diabetes_data %>%
   mutate(
     race = case_when(
@@ -64,16 +66,8 @@ diabetes_data <- diabetes_data %>%
       race.Other == 1 ~ "Other",
       TRUE ~ "Unknown"
     )
-  )
-
-# mutate a new column for BMI categories
-diabetes_data <- diabetes_data %>% 
-  mutate(bmi_category = case_when(
-    bmi < 18.5 ~ "Underweight",
-    bmi >= 18.5 & bmi < 24.9 ~ "Normal weight",
-    bmi >= 25 & bmi < 29.9 ~ "Overweight",
-    bmi >= 30 ~ "Obese"
-  ))
+  ) %>%
+  select(-race.AfricanAmerican, -race.Asian, -race.Caucasian, -race.Hispanic, -race.Other)
 
 #change character data to factor
 diabetes_data <- diabetes_data %>% 
@@ -88,140 +82,124 @@ diabetes_data <- diabetes_data %>%
   rename(
     three_month_avg_glucose = hbA1c_level
   )
+
 glimpse(diabetes_data)
-summary(diabetes_data)
 ```
+::: {.callout-tip}
+## Tip: Data Wrangling
+Convert categorical variables to factors for better visualization and modeling.
+:::
 
 ## 4. Visualization
+### 1. Density Plot of BMI by Diabetes Status
 ```{r}
-library(ggplot2)
-library(skimr)
+diabetes_data <- diabetes_data %>% filter(!is.na(gender))
+
+ggplot(diabetes_data, aes(x = bmi, color = factor(diabetes), fill = factor(diabetes))) +
+  geom_density(alpha = 0.4) +
+  labs(
+    title = "Density Plot of BMI by Diabetes Status, Faceted by Gender",
+    subtitle = "Comparison of BMI density between individuals with and without diabetes across genders",
+    x = "BMI",
+    y = "Density",
+    fill = "Diabetes",
+    color = "Diabetes"
+  ) +
+  theme_minimal() +
+  facet_wrap(~ gender, nrow = 2)
+
 ```
 
-### 1. Box Plot of BMI by Diabetes Status
-```{r}
-ggplot(diabetes_data, aes(x = diabetes, y = bmi)) +
-  geom_boxplot() +
-  labs(title = "Box Plot of BMI by Diabetes Status",
-  subtitle =""
-       x = "Diabetes (1 = Yes, 0 = No)",
-       y = "BMI") +
-       theme_minimal()
-```
+**Observation on BMI and Diabetes Status**
+
+The density plot shows that people with diabetes tend to have higher BMI values compared to those without diabetes. There is no obvious difference between the distribution of BMI for males and female. This suggests a possible association between higher BMI and diabetes risk.
 
 ### 2. Bar Plot of Diabetes by Smoking History
-```{r}
+```{r} 
 ggplot(diabetes_data, aes(x = smoking_history, fill = factor(diabetes))) +
   geom_bar(position = "dodge") +
-  labs(title = "Diabetes by Smoking History",
-       x = "Smoking History",
-       y = "Count",
-       fill = "Diabetes")
-```
+  labs(
+    title = "Bar Plot of Diabetes Status by Smoking History",
+    subtitle = "Distribution of diabetes status among different smoking history categories",
+    x = "Smoking History",
+    y = "Count",
+    fill = "Diabetes"
+  ) +
+  theme_minimal()
 
-# 3. Scatter Plot of HbA1c Level vs. Blood Glucose Level, colored by Diabetes Status
+```
+**Observation on Smoking History and Diabetes Status**
+
+There doesn't appear to be a strong visible association between smoking history and diabetes status in this dataset, as each smoking category shows similar proportions of individuals with and without diabetes. 
+
+### 3. Scatter Plot of HbA1c Level vs. Blood Glucose Level, colored by Diabetes Status
 ```{r}
-ggplot(diabetes_data, aes(x = hbA1c_level, y = blood_glucose_level, color = factor(diabetes))) +
+ggplot(diabetes_data, aes(x = three_month_avg_glucose, y = blood_glucose_level, color = factor(diabetes))) +
   geom_point(alpha = 0.7) +
-  labs(title = "Scatter Plot of HbA1c Level vs. Blood Glucose Level",
-       x = "HbA1c Level",
-       y = "Blood Glucose Level",
-       color = "Diabetes")
+  labs(
+    title = "Scatter Plot of HbA1c Level vs. Blood Glucose Level by Race",
+    x = "HbA1c Level (Three months average glucose level)",
+    y = "Blood Glucose Level",
+    color = "Diabetes"
+  ) +
+  theme_minimal()
 ```
-
+::: {column-margin}
 ```{r}
-library(ggplot2)
-
-# Bar plot for diabetes prevalence by race
-ggplot(diabetes_data, aes(x = race, fill = factor(diabetes))) +
-  geom_bar(position = "fill") +
-  labs(
-    title = "Proportion of Diabetes Status by Race",
-    x = "Race",
-    y = "Proportion",
-    fill = "Diabetes Status"
-  ) +
+#| fig-column: margin
+#| 
+ggplot(diabetes_data, aes(x = diabetes, y = three_month_avg_glucose, fill = diabetes)) +
+  geom_violin() +
+  labs(title = "Distribution of HbA1c Levels by Diabetes Status") +
   theme_minimal()
-
-# Bar plot for diabetes prevalence by gender
-ggplot(diabetes_data, aes(x = gender, fill = factor(diabetes))) +
-  geom_bar(position = "fill") +
-  labs(
-    title = "Proportion of Diabetes Status by Gender",
-    x = "Gender",
-    y = "Proportion",
-    fill = "Diabetes Status"
-  ) +
-  theme_minimal()
-
 ```
+:::
 
-```{r}
-# Bar plot for diabetes prevalence by race
-ggplot(diabetes_data, aes(x = race, fill = factor(diabetes))) +
-  geom_bar(position = "fill") +
-  labs(
-    title = "Proportion of Diabetes Status by Race",
-    x = "Race",
-    y = "Proportion",
-    fill = "Diabetes Status"
-  ) +
-  theme_minimal()
+**Observation on HbA1c Level and Blood Glucose Level**
 
-```
+More individuals with diabetes have higher blood glucose levels compared to those without diabetes.
+
 ## 5. Model
+```{r}
+clean_diabetes_data <- diabetes_data %>%
+  filter(!is.na(age), !is.na(gender), !is.na(three_month_avg_glucose), 
+         !is.na(bmi), !is.na(smoking_history), 
+         !is.na(hypertension), !is.na(heart_disease), !is.na(race))
+
+model <- glm(diabetes ~ age + gender + three_month_avg_glucose + bmi + 
+               smoking_history + hypertension + heart_disease + race, 
+             data = clean_diabetes_data, family = "binomial")
+
+summary(model)
+```
 
 ```{r}
-# Remove rows with missing values in the relevant columns for modeling
-diabetes_data_clean <- diabetes_data %>%
-  filter(!is.na(age), !is.na(gender), !is.na(race), !is.na(bmi), 
-         !is.na(hypertension), !is.na(heart_disease), 
-         !is.na(hbA1c_level), !is.na(smoking_history))
-# Fit a logistic regression model to predict diabetes status
-model <- glm(diabetes ~ age + gender + race + bmi + hypertension + heart_disease + hbA1c_level + smoking_history, 
-             data = diabetes_data, family = "binomial")
+# Add predicted probabilities to the dataset
+clean_diabetes_data$predicted_prob <- predict(model, type = "response")
 
-# Display model summary
-summary(model)
+# Subsample the data for visualization (to avoid overcrowding)
+subset_data <- clean_diabetes_data %>% sample_n(500)
 
-library(ggplot2)
-
-# Add predicted probabilities to the data
-diabetes_data$predicted_prob <- predict(model, type = "response")
-
-# Plot predicted probabilities by race
-ggplot(diabetes_data, aes(x = race, y = predicted_prob)) +
-  geom_boxplot() +
+# Plot predicted probabilities against a key variable
+ggplot(subset_data, aes(x = three_month_avg_glucose, y = predicted_prob, color = diabetes)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "loess", se = FALSE, color = "black") +
   labs(
-    title = "Predicted Probability of Diabetes by Race",
-    x = "Race",
+    title = "Predicted Probability of Diabetes by HbA1c Level",
+    x = "HbA1c Level (Three months average glucose level)",
     y = "Predicted Probability of Diabetes"
   ) +
   theme_minimal()
-
 ```
 
 
-```{r}
-library(broom)
-library(dplyr)
-
-# Extract coefficients, calculate odds ratios, and plot
-odds_ratios <- tidy(model) %>%
-  mutate(odds_ratio = exp(estimate)) %>%
-  filter(term != "(Intercept)")
-
-ggplot(odds_ratios, aes(x = reorder(term, odds_ratio), y = odds_ratio)) +
-  geom_point() +
-  geom_errorbar(aes(ymin = exp(estimate - 1.96 * std.error), ymax = exp(estimate + 1.96 * std.error))) +
-  coord_flip() +
-  labs(
-    title = "Odds Ratios for Predictors of Diabetes",
-    x = "Predictors",
-    y = "Odds Ratio"
-  ) +
-  theme_minimal()
-
-```
 ## 6. Conclusion
+In conclusion, we see that higher BMI values are associated with diabetes risk, because we can see from the density plot that people with diabetes tend to have higher BMI values. Smoking history does not seem to be a strong predictor of diabetes status in this dataset, as the bar plot shows similar proportions of individuals with and without diabetes across smoking categories. 
+The scatter plot of HbA1c levels vs. blood glucose levels colored by diabetes status shows a clear separation between individuals with and without diabetes, with higher blood glucose levels associated with diabetes. The logistic regression model shows that important predictor of diabetes status including age, gender , three_month_avg_glucose, bmi, smoking_history, hypertension, heart_disease.
+
 ## 7. Function Summary
+dyplr: summarize, mutate, select, filter,glimpse, rename
+
+tidyr: gather
+
+ggplot2: ggplot, geom_density, geom_bar, geom_point, geom_smooth, facet_wrap, labs, theme_minimal
