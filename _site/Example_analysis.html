@@ -178,18 +178,16 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#density-plot-of-bmi-by-diabetes-status" id="toc-density-plot-of-bmi-by-diabetes-status" class="nav-link" data-scroll-target="#density-plot-of-bmi-by-diabetes-status">1. Density Plot of BMI by Diabetes Status</a></li>
   <li><a href="#bar-plot-of-diabetes-by-smoking-history" id="toc-bar-plot-of-diabetes-by-smoking-history" class="nav-link" data-scroll-target="#bar-plot-of-diabetes-by-smoking-history">2. Bar Plot of Diabetes by Smoking History</a></li>
+  <li><a href="#scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status" id="toc-scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status" class="nav-link" data-scroll-target="#scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status">3. Scatter Plot of HbA1c Level vs.&nbsp;Blood Glucose Level, colored by Diabetes Status</a></li>
   </ul></li>
-  <li><a href="#scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status" id="toc-scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status" class="nav-link" data-scroll-target="#scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status">3. Scatter Plot of HbA1c Level vs.&nbsp;Blood Glucose Level, colored by Diabetes Status</a>
-  <ul class="collapse">
   <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">5. Model</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">6. Conclusion</a></li>
   <li><a href="#function-summary" id="toc-function-summary" class="nav-link" data-scroll-target="#function-summary">7. Function Summary</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -217,15 +215,25 @@ div.csl-indent {
 
 
 <p><img src="pictures/Image_diabetes.JPG" class="img-fluid" alt="Diabetes-related Illustration"> <em>Image Credit: <span class="citation" data-cites="buravleva2024diabetes">(<a href="#ref-buravleva2024diabetes" role="doc-biblioref">Buravleva stock/Shutterstock.com 2024</a>)</span>.</em></p>
-<blockquote class="blockquote">
-<p><strong>Callout 1: Background on Diabetes Prevalence</strong> Diabetes is a chronic disease that affects how your body turns food into energy. Over 133 million Americans are living with diabetes or prediabetes. Understanding the associated risk factors can help in finding patients with diabetes in early stage and start treatments earlier for better outcomes.</p>
-</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Background on Diabetes Prevalence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Diabetes is a chronic disease that affects how your body turns food into energy. Over <strong>38.4 million Americans</strong> are living with diabetes or prediabetes <span class="citation" data-cites="cdc2023diabetes">(<a href="#ref-cdc2023diabetes" role="doc-biblioref">Disease Control and Prevention 2023</a>)</span>. Understanding the associated risk factors can help in finding patients with diabetes in the early stage and starting treatments earlier for better outcomes.</p>
+</div>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
-<p>This report provides an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes. The goal is to uncover patterns that could offer insights into factors associated with diabetes prevalence, which may be of interest to those looking to understand how lifestyle and health metrics like BMI, blood glucose levels, and smoking history are connected to diabetes.</p>
+<p>This is an analysis of diabetes-related data to explore how different demographic and health factors may relate to diabetes.</p>
 <section id="intended-audience" class="level4">
 <h4 class="anchored" data-anchor-id="intended-audience">Intended Audience</h4>
-<p>This report is intended for the general public, including individuals interested in understanding diabetes-related data and factors associated with diabetes risk. The analysis is presented in a straightforward manner, avoiding complex statistical jargon, so that anyone with a basic understanding of health concepts can follow along and gain insights.</p>
+<p>This report is for anyone interested in diabetes, including the general public and those with a basic understanding of health.</p>
 </section>
 <section id="data-source" class="level4">
 <h4 class="anchored" data-anchor-id="data-source">Data Source</h4>
@@ -316,9 +324,7 @@ div.csl-indent {
 <section id="data-wrangling" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling">3. Data Wrangling</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(httpgd)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#hgd()</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'dplyr'</code></pre>
@@ -334,8 +340,7 @@ Attaching package: 'dplyr'</code></pre>
     intersect, setdiff, setequal, union</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"diabetes_dataset.csv"</span>)</span>
@@ -353,33 +358,24 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>race.AfricanAmerican, <span class="sc">-</span>race.Asian, <span class="sc">-</span>race.Caucasian, <span class="sc">-</span>race.Hispanic, <span class="sc">-</span>race.Other)</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># mutate a new column for BMI categories</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#change character data to factor</span></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bmi_category =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    bmi <span class="sc">&lt;</span> <span class="fl">18.5</span> <span class="sc">~</span> <span class="st">"Underweight"</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    bmi <span class="sc">&gt;=</span> <span class="fl">18.5</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;</span> <span class="fl">24.9</span> <span class="sc">~</span> <span class="st">"Normal weight"</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    bmi <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;</span> <span class="fl">29.9</span> <span class="sc">~</span> <span class="st">"Overweight"</span>,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    bmi <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"Obese"</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#change character data to factor</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">smoking_history =</span> <span class="fu">factor</span>(smoking_history, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>, <span class="st">"No Info"</span>)))</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)))</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> </span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diabetes =</span> <span class="fu">factor</span>(diabetes, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>)))</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#rename hbA1c_level</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">three_month_avg_glucose =</span> hbA1c_level</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diabetes_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">smoking_history =</span> <span class="fu">factor</span>(smoking_history, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"never"</span>, <span class="st">"former"</span>, <span class="st">"current"</span>, <span class="st">"No Info"</span>)))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)))</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diabetes =</span> <span class="fu">factor</span>(diabetes, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>)))</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#rename hbA1c_level</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">three_month_avg_glucose =</span> hbA1c_level</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diabetes_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100,000
-Columns: 13
+Columns: 12
 $ year                    &lt;int&gt; 2020, 2015, 2015, 2015, 2016, 2016, 2015, 2016…
 $ gender                  &lt;fct&gt; Female, Female, Male, Male, Female, Male, Fema…
 $ age                     &lt;dbl&gt; 32, 29, 18, 41, 52, 66, 49, 15, 51, 42, 15, 53…
@@ -391,61 +387,42 @@ $ bmi                     &lt;dbl&gt; 27.32, 19.95, 23.76, 27.32, 23.75, 27.32, 
 $ three_month_avg_glucose &lt;dbl&gt; 5.0, 5.0, 4.8, 4.0, 6.5, 5.7, 5.7, 5.0, 6.0, 5…
 $ blood_glucose_level     &lt;int&gt; 100, 90, 160, 159, 90, 159, 80, 155, 100, 160,…
 $ diabetes                &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0…
-$ race                    &lt;chr&gt; "Other", "Asian", "Other", "Caucasian", "Afric…
-$ bmi_category            &lt;chr&gt; "Overweight", "Normal weight", "Normal weight"…</code></pre>
+$ race                    &lt;chr&gt; "Other", "Asian", "Other", "Caucasian", "Afric…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(diabetes_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      year         gender           age          location        
- Min.   :2015   Female:58552   Min.   : 0.08   Length:100000     
- 1st Qu.:2019   Male  :41430   1st Qu.:24.00   Class :character  
- Median :2019   NA's  :   18   Median :43.00   Mode  :character  
- Mean   :2018                  Mean   :41.89                     
- 3rd Qu.:2019                  3rd Qu.:60.00                     
- Max.   :2022                  Max.   :80.00                     
-  hypertension     heart_disease     smoking_history      bmi       
- Min.   :0.00000   Min.   :0.00000   never  :35095   Min.   :10.01  
- 1st Qu.:0.00000   1st Qu.:0.00000   former : 9352   1st Qu.:23.63  
- Median :0.00000   Median :0.00000   current: 9286   Median :27.32  
- Mean   :0.07485   Mean   :0.03942   No Info:35816   Mean   :27.32  
- 3rd Qu.:0.00000   3rd Qu.:0.00000   NA's   :10451   3rd Qu.:29.58  
- Max.   :1.00000   Max.   :1.00000                   Max.   :95.69  
- three_month_avg_glucose blood_glucose_level diabetes      race          
- Min.   :3.500           Min.   : 80.0       0:91500   Length:100000     
- 1st Qu.:4.800           1st Qu.:100.0       1: 8500   Class :character  
- Median :5.800           Median :140.0                 Mode  :character  
- Mean   :5.528           Mean   :138.1                                   
- 3rd Qu.:6.200           3rd Qu.:159.0                                   
- Max.   :9.000           Max.   :300.0                                   
- bmi_category      
- Length:100000     
- Class :character  
- Mode  :character  
-                   
-                   
-                   </code></pre>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip: Data Wrangling
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Convert categorical variables to factors for better visualization and modeling.</p>
 </div>
 </div>
 </section>
-<section id="visualization" class="level2">
+<section id="visualization" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="visualization">4. Visualization</h2>
 <section id="density-plot-of-bmi-by-diabetes-status" class="level3">
 <h3 class="anchored" data-anchor-id="density-plot-of-bmi-by-diabetes-status">1. Density Plot of BMI by Diabetes Status</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gender))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> bmi, <span class="at">color =</span> <span class="fu">factor</span>(diabetes), <span class="at">fill =</span> <span class="fu">factor</span>(diabetes))) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Density Plot of BMI by Diabetes Status, Faceted by Gender"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Comparison of BMI density between individuals with and without diabetes across genders"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"BMI"</span>,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diabetes"</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Diabetes"</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> gender, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gender))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> bmi, <span class="at">color =</span> <span class="fu">factor</span>(diabetes), <span class="at">fill =</span> <span class="fu">factor</span>(diabetes))) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Density Plot of BMI by Diabetes Status, Faceted by Gender"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Comparison of BMI density between individuals with and without diabetes across genders"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"BMI"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diabetes"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Diabetes"</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> gender, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -454,23 +431,22 @@ $ bmi_category            &lt;chr&gt; "Overweight", "Normal weight", "Normal wei
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p><strong>Callout 2: 2: Observation on BMI and Diabetes Status</strong> The density plot shows that people with diabetes tend to have higher BMI values compared to those without diabetes. There is no obvious difference between the distribution of BMI for males and female. This suggests a possible association between higher BMI and diabetes risk.</p>
-</blockquote>
+<p><strong>Observation on BMI and Diabetes Status</strong></p>
+<p>The density plot shows that people with diabetes tend to have higher BMI values compared to those without diabetes. There is no obvious difference between the distribution of BMI for males and female. This suggests a possible association between higher BMI and diabetes risk.</p>
 </section>
 <section id="bar-plot-of-diabetes-by-smoking-history" class="level3">
 <h3 class="anchored" data-anchor-id="bar-plot-of-diabetes-by-smoking-history">2. Bar Plot of Diabetes by Smoking History</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> smoking_history, <span class="at">fill =</span> <span class="fu">factor</span>(diabetes))) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Bar Plot of Diabetes Status by Smoking History"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Distribution of diabetes status among different smoking history categories"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Smoking History"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diabetes"</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> smoking_history, <span class="at">fill =</span> <span class="fu">factor</span>(diabetes))) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Bar Plot of Diabetes Status by Smoking History"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Distribution of diabetes status among different smoking history categories"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Smoking History"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diabetes"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -479,25 +455,21 @@ $ bmi_category            &lt;chr&gt; "Overweight", "Normal weight", "Normal wei
 </div>
 </div>
 </div>
-<blockquote class="blockquote">
-<p><strong>Callout 3: Observation on Smoking History and Diabetes Status</strong> There doesn’t appear to be a strong visible association between smoking history and diabetes status in this dataset, as each smoking category shows similar proportions of individuals with and without diabetes.</p>
-</blockquote>
+<p><strong>Observation on Smoking History and Diabetes Status</strong></p>
+<p>There doesn’t appear to be a strong visible association between smoking history and diabetes status in this dataset, as each smoking category shows similar proportions of individuals with and without diabetes.</p>
 </section>
-</section>
-<section id="scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status" class="level1">
-<h1>3. Scatter Plot of HbA1c Level vs.&nbsp;Blood Glucose Level, colored by Diabetes Status</h1>
+<section id="scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="scatter-plot-of-hba1c-level-vs.-blood-glucose-level-colored-by-diabetes-status">3. Scatter Plot of HbA1c Level vs.&nbsp;Blood Glucose Level, colored by Diabetes Status</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2019</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Facet-wrapped scatter plot by race</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> three_month_avg_glucose, <span class="at">y =</span> blood_glucose_level, <span class="at">color =</span> <span class="fu">factor</span>(diabetes))) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Scatter Plot of HbA1c Level vs. Blood Glucose Level by Race"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"HbA1c Level (Three months average glucose level)"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Blood Glucose Level"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Diabetes"</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> three_month_avg_glucose, <span class="at">y =</span> blood_glucose_level, <span class="at">color =</span> <span class="fu">factor</span>(diabetes))) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Scatter Plot of HbA1c Level vs. Blood Glucose Level by Race"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"HbA1c Level (Three months average glucose level)"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Blood Glucose Level"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Diabetes"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -506,27 +478,38 @@ $ bmi_category            &lt;chr&gt; "Overweight", "Normal weight", "Normal wei
 </div>
 </div>
 </div>
+<div class="{column-margin} page-columns page-full">
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> diabetes, <span class="at">y =</span> three_month_avg_glucose, <span class="at">fill =</span> diabetes)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of HbA1c Levels by Diabetes Status"</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Example_analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div></div></div>
+</div>
+<p><strong>Observation on HbA1c Level and Blood Glucose Level</strong></p>
+<p>More individuals with diabetes have higher blood glucose levels compared to those without diabetes.</p>
+</section>
+</section>
 <section id="model" class="level2">
 <h2 class="anchored" data-anchor-id="model">5. Model</h2>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">6. Conclusion</h2>
-</section>
-<section id="function-summary" class="level2">
-<h2 class="anchored" data-anchor-id="function-summary">7. Function Summary</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out rows with missing values in relevant columns</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>clean_diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age), <span class="sc">!</span><span class="fu">is.na</span>(gender), <span class="sc">!</span><span class="fu">is.na</span>(three_month_avg_glucose), </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(bmi), <span class="sc">!</span><span class="fu">is.na</span>(smoking_history), </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(hypertension), <span class="sc">!</span><span class="fu">is.na</span>(heart_disease), <span class="sc">!</span><span class="fu">is.na</span>(race))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit logistic regression model</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(diabetes <span class="sc">~</span> age <span class="sc">+</span> gender <span class="sc">+</span> three_month_avg_glucose <span class="sc">+</span> bmi <span class="sc">+</span> </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>               smoking_history <span class="sc">+</span> hypertension <span class="sc">+</span> heart_disease <span class="sc">+</span> race, </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> clean_diabetes_data, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>clean_diabetes_data <span class="ot">&lt;-</span> diabetes_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age), <span class="sc">!</span><span class="fu">is.na</span>(gender), <span class="sc">!</span><span class="fu">is.na</span>(three_month_avg_glucose), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(bmi), <span class="sc">!</span><span class="fu">is.na</span>(smoking_history), </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(hypertension), <span class="sc">!</span><span class="fu">is.na</span>(heart_disease), <span class="sc">!</span><span class="fu">is.na</span>(race))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(diabetes <span class="sc">~</span> age <span class="sc">+</span> gender <span class="sc">+</span> three_month_avg_glucose <span class="sc">+</span> bmi <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>               smoking_history <span class="sc">+</span> hypertension <span class="sc">+</span> heart_disease <span class="sc">+</span> race, </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> clean_diabetes_data, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -536,71 +519,52 @@ glm(formula = diabetes ~ age + gender + three_month_avg_glucose +
 
 Coefficients:
                           Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)             -21.871731   0.276031 -79.236  &lt; 2e-16 ***
-age                       0.048141   0.001175  40.965  &lt; 2e-16 ***
-genderMale                0.332187   0.037162   8.939  &lt; 2e-16 ***
-three_month_avg_glucose   2.307939   0.037018  62.347  &lt; 2e-16 ***
-bmi                       0.088573   0.002623  33.770  &lt; 2e-16 ***
-smoking_historyformer     0.056968   0.050724   1.123   0.2614    
-smoking_historycurrent    0.232766   0.057624   4.039 5.36e-05 ***
-smoking_historyNo Info   -0.551570   0.047169 -11.693  &lt; 2e-16 ***
-hypertension              0.742824   0.047706  15.571  &lt; 2e-16 ***
-heart_disease             0.778963   0.061855  12.593  &lt; 2e-16 ***
-raceAsian                -0.049441   0.057587  -0.859   0.3906    
-raceCaucasian            -0.048401   0.056994  -0.849   0.3957    
-raceHispanic             -0.072439   0.057185  -1.267   0.2052    
-raceOther                -0.101513   0.057692  -1.760   0.0785 .  
+(Intercept)             -22.083503   0.248632 -88.820   &lt;2e-16 ***
+age                       0.048138   0.001051  45.799   &lt;2e-16 ***
+genderMale                0.314095   0.033249   9.447   &lt;2e-16 ***
+three_month_avg_glucose   2.336638   0.033398  69.963   &lt;2e-16 ***
+bmi                       0.089558   0.002342  38.240   &lt;2e-16 ***
+smoking_historyformer     0.044584   0.045316   0.984    0.325    
+smoking_historycurrent    0.220265   0.051644   4.265    2e-05 ***
+smoking_historyNo Info   -0.565228   0.042242 -13.381   &lt;2e-16 ***
+hypertension              0.735899   0.042621  17.266   &lt;2e-16 ***
+heart_disease             0.767083   0.055523  13.816   &lt;2e-16 ***
+raceAsian                 0.005444   0.051173   0.106    0.915    
+raceCaucasian            -0.045005   0.051271  -0.878    0.380    
+raceHispanic             -0.055107   0.051213  -1.076    0.282    
+raceOther                -0.068199   0.051520  -1.324    0.186    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 40308  on 71388  degrees of freedom
-Residual deviance: 21006  on 71375  degrees of freedom
-AIC: 21034
+    Null deviance: 50771  on 89539  degrees of freedom
+Residual deviance: 26275  on 89526  degrees of freedom
+AIC: 26303
 
 Number of Fisher Scoring iterations: 8</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add predicted probabilities to the dataset</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>clean_diabetes_data<span class="sc">$</span>predicted_prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">type =</span> <span class="st">"response"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsample the data for visualization (to avoid overcrowding)</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> clean_diabetes_data <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="dv">500</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot predicted probabilities against a key variable</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(subset_data, <span class="fu">aes</span>(<span class="at">x =</span> three_month_avg_glucose, <span class="at">y =</span> predicted_prob, <span class="at">color =</span> diabetes)) <span class="sc">+</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Predicted Probability of Diabetes by HbA1c Level"</span>,</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"HbA1c Level (Three months average glucose level)"</span>,</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predicted Probability of Diabetes"</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add predicted probabilities to the dataset</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>clean_diabetes_data<span class="sc">$</span>predicted_prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsample the data for visualization (to avoid overcrowding)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> clean_diabetes_data <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="dv">500</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot predicted probabilities against a key variable</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(subset_data, <span class="fu">aes</span>(<span class="at">x =</span> three_month_avg_glucose, <span class="at">y =</span> predicted_prob, <span class="at">color =</span> diabetes)) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Predicted Probability of Diabetes by HbA1c Level"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"HbA1c Level (Three months average glucose level)"</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Predicted Probability of Diabetes"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Example_analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(clean_diabetes_data, <span class="fu">aes</span>(<span class="at">x =</span> three_month_avg_glucose, <span class="at">y =</span> bmi, <span class="at">fill =</span> diabetes)) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Heatmap of HbA1c Level and BMI"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"HbA1c Level"</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"BMI"</span>,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diabetes"</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -609,10 +573,19 @@ Number of Fisher Scoring iterations: 8</code></pre>
 </div>
 </div>
 </div>
-
-
-
 </section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">6. Conclusion</h2>
+<p>In conclusion, we see that higher BMI values are associated with diabetes risk, because we can see from the density plot that people with diabetes tend to have higher BMI values. Smoking history does not seem to be a strong predictor of diabetes status in this dataset, as the bar plot shows similar proportions of individuals with and without diabetes across smoking categories. The scatter plot of HbA1c levels vs.&nbsp;blood glucose levels colored by diabetes status shows a clear separation between individuals with and without diabetes, with higher blood glucose levels associated with diabetes. The logistic regression model shows that important predictor of diabetes status including age, gender , three_month_avg_glucose, bmi, smoking_history, hypertension, heart_disease.</p>
+</section>
+<section id="function-summary" class="level2">
+<h2 class="anchored" data-anchor-id="function-summary">7. Function Summary</h2>
+<p>dyplr: summarize, mutate, select, filter,glimpse, rename</p>
+<p>tidyr: gather</p>
+<p>ggplot2: ggplot, geom_density, geom_bar, geom_point, geom_smooth, facet_wrap, labs, theme_minimal</p>
+
+
+
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -621,6 +594,9 @@ Buravleva stock/Shutterstock.com. 2024. <span>“The Future of Diabetes Treatmen
 </div>
 <div id="ref-choksi2024diabetes" class="csl-entry" role="listitem">
 Choksi, Priyam. 2024. <span>“Comprehensive Diabetes Clinical Dataset (100k Rows).”</span> <a href="https://www.kaggle.com/datasets/priyamchoksi/comprehensive-diabetes-clinical-dataset">https://www.kaggle.com/datasets/priyamchoksi/comprehensive-diabetes-clinical-dataset</a>.
+</div>
+<div id="ref-cdc2023diabetes" class="csl-entry" role="listitem">
+Disease Control, Centers for, and Prevention. 2023. <span>“National Diabetes Statistics Report.”</span> <a href="https://www.cdc.gov/diabetes/php/data-research/index.html" class="uri">https://www.cdc.gov/diabetes/php/data-research/index.html</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -715,7 +691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/5d1d2aa2-4fa0-4190-9deb-4f1218bfa39a\.netlify\.app\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
